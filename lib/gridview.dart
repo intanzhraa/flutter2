@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class IconWidget extends StatelessWidget {
+class cobainGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +11,7 @@ class IconWidget extends StatelessWidget {
         ),
       ),
       body: GridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: 3,
         children: <Widget>[
           Container(
             color: Colors.yellowAccent,
