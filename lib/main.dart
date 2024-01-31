@@ -1,4 +1,8 @@
+import 'package:belajar_flutter/formscreen.dart';
+import 'package:belajar_flutter/grid_builder.dart';
 import 'package:belajar_flutter/latihanrow.dart';
+import 'package:belajar_flutter/outputbookingscreen.dart';
+import 'package:belajar_flutter/outputform.dart';
 import 'package:belajar_flutter/persib.dart';
 import 'package:flutter/material.dart';
 // import 'container_widget.dart';
@@ -11,9 +15,17 @@ import 'package:flutter/material.dart';
 // import 'listviewseparated.dart';
 // import 'persib.dart';
 import 'latihanchalkzone.dart';
+import 'grid_builder.dart';
 // import 'navigator.dart';
 import 'homescreen.dart';
 import 'aboutscreen.dart';
+import 'package:belajar_flutter/flora/listflorascreen.dart';
+import 'package:belajar_flutter/flora/detailflora.dart';
+import 'package:belajar_flutter/formscreen.dart';
+import 'package:belajar_flutter/outputform.dart';
+import 'package:belajar_flutter/bookingscreen.dart';
+import 'package:belajar_flutter/pembelian.dart';
+import 'package:belajar_flutter/outputpembelian.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -169,7 +181,12 @@ class _BottomNavigationMenuState extends State<BottomNavigationMenu> {
   @override
   int _selectedTab = 0;
 
-  List _pages = [HomeScreen(), LatihanChalkzone(), Persib(), LatihanRow()];
+  List _pages = [
+    HomeScreen(),
+    ListFloraScreen(),
+    BelajarForm(),
+    LatihanForm(),
+  ];
 
   _changeTab(int index) {
     setState(() {
@@ -188,11 +205,12 @@ class _BottomNavigationMenuState extends State<BottomNavigationMenu> {
         unselectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "List"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.grid_3x3_outlined), label: "Grid"),
+              icon: Icon(Icons.list), label: "ListFloraScreen"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.contact_mail), label: "Container"),
+              icon: Icon(Icons.person), label: "FormScreen"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.contact_mail), label: "BookingScreen"),
         ],
       ),
     );
