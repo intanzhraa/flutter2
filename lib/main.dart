@@ -24,8 +24,9 @@ import 'package:belajar_flutter/flora/detailflora.dart';
 import 'package:belajar_flutter/formscreen.dart';
 import 'package:belajar_flutter/outputform.dart';
 import 'package:belajar_flutter/bookingscreen.dart';
-import 'package:belajar_flutter/pembelian.dart';
-import 'package:belajar_flutter/outputpembelian.dart';
+import 'package:belajar_flutter/outputbookingscreen.dart';
+import 'package:belajar_flutter/loginRegister/formlogin.dart';
+import 'package:belajar_flutter/loginRegister/formregister.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -184,7 +185,8 @@ class _BottomNavigationMenuState extends State<BottomNavigationMenu> {
   List _pages = [
     HomeScreen(),
     ListFloraScreen(),
-    BelajarForm(),
+    LoginForm(),
+    RegisterForm(),
     LatihanForm(),
   ];
 
@@ -205,8 +207,7 @@ class _BottomNavigationMenuState extends State<BottomNavigationMenu> {
         unselectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.list), label: "ListFloraScreen"),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: "FormLogin"),
           BottomNavigationBarItem(
               icon: Icon(Icons.person), label: "FormScreen"),
           BottomNavigationBarItem(

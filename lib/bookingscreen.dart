@@ -123,7 +123,7 @@ class _LatihanFormState extends State<LatihanForm> {
                   TextFormField(
                     controller: bookingController,
                     decoration: InputDecoration(
-                      labelText: 'Tanggal Booking',
+                      labelText: 'Tanggal Beli',
                       border: OutlineInputBorder(),
                     ),
                     onTap: () async {
@@ -148,7 +148,7 @@ class _LatihanFormState extends State<LatihanForm> {
                       _submit();
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.amber,
+                      primary: Colors.blueAccent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

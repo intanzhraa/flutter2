@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          
           children: [
             Text("Halaman Home"),
             TextButton(
