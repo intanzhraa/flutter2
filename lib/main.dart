@@ -5,18 +5,9 @@ import 'package:belajar_flutter/outputbookingscreen.dart';
 import 'package:belajar_flutter/outputform.dart';
 import 'package:belajar_flutter/persib.dart';
 import 'package:flutter/material.dart';
-// import 'container_widget.dart';
-// import 'column_widget.dart';
-// import 'rowcolumn.dart';
-// import 'latihanrow.dart';
-// import 'iconwidget.dart';
-// import 'listviewbasic.dart';
-// import 'listviewbuilder.dart';
-// import 'listviewseparated.dart';
-// import 'persib.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'latihanchalkzone.dart';
 import 'grid_builder.dart';
-// import 'navigator.dart';
 import 'homescreen.dart';
 import 'aboutscreen.dart';
 import 'package:belajar_flutter/flora/listflorascreen.dart';
@@ -27,116 +18,16 @@ import 'package:belajar_flutter/bookingscreen.dart';
 import 'package:belajar_flutter/outputbookingscreen.dart';
 import 'package:belajar_flutter/loginRegister/formlogin.dart';
 import 'package:belajar_flutter/loginRegister/formregister.dart';
-
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-//   // this
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: "Belajar Flutter",
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text("nextgenhalaman"),
-//           backgroundColor: Colors.blueAccent,
-//           centerTitle: true,
-//         ),
-//         body: Container(
-//           color: Colors.white,
-//           child: firstRoute(),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class BelajarHelloWord extends StatelessWidget {
-//   const BelajarHelloWord({
-//     Key? key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextWidget();
-//   }
-// }
-
-// class TextWidget extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Text(
-//       "XII RPL 2",
-//       style: TextStyle(
-//         fontSize: 24,
-//         fontWeight: FontWeight.bold,
-//         color: Colors.deepPurple[400],
-//       ),
-//     );
-//   }
-// }
-
-// void main() {
-//   runApp(MaterialApp(
-//     title: 'Named Routes',
-//     initialRoute: '/',
-//     routes: {
-//       '/': (context) => const Homescreen(),
-//       '/second': (context) => const secondRoute(),
-//     },
-//   ));
-// }
-
-// // ignore: camel_case_types
-// class Homescreen extends StatelessWidget {
-//   const Homescreen({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Nextgen Halaman 1'),
-//         backgroundColor: Colors.blue,
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           child: const Text('Pergi ke halaman 2'),
-//           onPressed: () {
-//             Navigator.pushNamed(context, '/second');
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// // ignore: camel_case_types
-// class secondRoute extends StatelessWidget {
-//   const secondRoute({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("Nextgen Halaman 2"),
-//         backgroundColor: Colors.blue,
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () {
-//             Navigator.pop(context);
-//           },
-//           child: const Text('Kembali!'),
-//         ),
-//       ),
-//     );
-//   }
-// }
+// import 'container_widget.dart';
+// import 'column_widget.dart';
+// import 'rowcolumn.dart';
+// import 'latihanrow.dart';
+// import 'iconwidget.dart';
+// import 'listviewbasic.dart';
+// import 'listviewbuilder.dart';
+// import 'listviewseparated.dart';
+// import 'persib.dart';
+// import 'navigator.dart';
 
 void main() {
   runApp(MyApp());
@@ -147,28 +38,49 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Project Flutter",
-      initialRoute: '/',
-      routes: {
-        '/': (context) => BottomNavigationMenu(),
-        '/about': (context) => AboutScreen(),
-        '/latihan': (context) => LatihanChalkzone()
-      },
+      title: "Ini Project Flutter Pertamaku",
+      home: CheckAuth(),
     );
   }
 }
 
-class TextWidget extends StatelessWidget {
+class CheckAuth extends StatefulWidget {
+  @override
+  _CheckAuthState createState() => _CheckAuthState();
+}
+
+class _CheckAuthState extends State<CheckAuth> {
+  bool isAuth = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfLoggedIn();
+  }
+
+  void _checkIfLoggedIn() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('token');
+    if (token != null) {
+      if (mounted) {
+        setState(() {
+          isAuth = true;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        "Hello Dunia...\nHallo Prajuritt.. ",
-        style: TextStyle(
-            color: Colors.blueAccent,
-            fontSize: 24,
-            fontWeight: FontWeight.bold),
-      ),
+    Widget child;
+    if (isAuth) {
+      child = BottomNavigationMenu();
+    } else {
+      child = LoginForm();
+    }
+
+    return Scaffold(
+      body: child,
     );
   }
 }
@@ -185,9 +97,9 @@ class _BottomNavigationMenuState extends State<BottomNavigationMenu> {
   List _pages = [
     HomeScreen(),
     ListFloraScreen(),
+    LatihanForm(),
     LoginForm(),
     RegisterForm(),
-    LatihanForm(),
   ];
 
   _changeTab(int index) {
@@ -198,20 +110,20 @@ class _BottomNavigationMenuState extends State<BottomNavigationMenu> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: _pages[_selectedTab],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
         onTap: (index) => _changeTab(index),
-        selectedItemColor: Colors.red,
+        selectedItemColor: Colors.blueAccent,
         unselectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: "FormLogin"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person), label: "FormScreen"),
+              icon: Icon(Icons.view_stream), label: "DetailFlora"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.contact_mail), label: "BookingScreen"),
+              icon: Icon(Icons.payment), label: "BookingScreen"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_box), label: "FormLogin"),
         ],
       ),
     );
